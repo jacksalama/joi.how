@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { SettingsTile, TabBar } from '../../common';
 import { E621Search } from '../../e621';
 import { useState } from 'react';
-import { WalltalkerSearch } from '../../walltalker';
+import { LocalFileImport } from '../../localfile';
 
 const TabSettingsTile = styled(SettingsTile)`
   & > legend {
@@ -11,24 +11,32 @@ const TabSettingsTile = styled(SettingsTile)`
   }
 `;
 
+enum Tab {
+  E621 = 'e621',
+  Booru = 'booru',
+  Local = 'local',
+}
+
 export const ServiceSettings = () => {
-  const [activeTab, setActiveTab] = useState<'e621' | 'walltalker'>('e621');
+  const [activeTab, setActiveTab] = useState<Tab>(Tab.E621);
 
   return (
     <TabSettingsTile
       label={
         <TabBar
           tabs={[
-            { id: 'e621', content: 'e621' },
-            // { id: 'walltalker', content: 'Walltalker' },
+            { id: Tab.E621, content: 'e621' },
+            { id: Tab.Booru, content: 'Booru' },
+            { id: Tab.Local, content: 'Local' },
           ]}
           current={activeTab}
-          onChange={id => setActiveTab(id as 'e621' | 'walltalker')}
+          onChange={id => setActiveTab(id as Tab)}
         />
       }
     >
       {activeTab === 'e621' && <E621Search />}
-      {activeTab === 'walltalker' && <WalltalkerSearch />}
+      {activeTab === 'booru' && <div>TODO!</div>}
+      {activeTab === 'local' && <LocalFileImport />}
     </TabSettingsTile>
   );
 };

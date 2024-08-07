@@ -97,12 +97,15 @@ export const Image: React.FC<ImageProps> = ({
         muted={!loud}
         playsInline
         onLoadedMetadata={event => {
-          if (randomStart) {
-            const video = videoRef.current;
-            if (video) {
-              video.currentTime = Math.random() * video.duration;
+          const video = videoRef.current;
+
+          if (video) {
+            if (randomStart) {
+              video.currentTime =
+                Math.random() * video.duration * 0.8 + video.duration * 0.1;
             }
           }
+
           onLoadedMetadata?.(event);
         }}
         {...rest}

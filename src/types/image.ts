@@ -16,4 +16,6 @@ export interface ImageItem {
 
 export enum ImageServiceType {
   e621,
+  booru = 1,
+  local = 2,
 }
